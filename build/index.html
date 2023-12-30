@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+    <script>
+        async function getApiValue() {
+            let json;
+            url = "http://localhost:3000/getValue"
+            let response = await fetch(url);
+            if (response.ok) { // если HTTP-статус в диапазоне 200-299
+                // получаем тело ответа (см. про этот метод ниже)
+                json = await response.json();
+                alert(json)
+            } else {
+                alert("Ошибка HTTP: " + response.status);
+            }
+            return json;
+        }
+
+        async function showResponse() {
+            const answer1 = document.getElementById("answer1");
+            const answer2 = document.getElementById("answer2");
+
+            let answers = await getApiValue();
+
+            answer1.innerHTML = answers["resA"];
+            answer2.innerHTML = answers["resB"];
+            alert("Выполнено");
+        }
+
+        function clearValue() {
+            const answer1 = document.getElementById("answer1");
+            const answer2 = document.getElementById("answer2");
+
+            answer1.innerHTML = ""
+            answer2.innerHTML = ""
+        }
+    </script>
+
+
+</head>
+
+<body>
+    <h1>Hello</h1>
+    <h2>Условие</h2>
+    <p>
+        В каждой из двух матриц A (7×7), B (5×5) определить минимальное значение среди положительных элементов главной
+        диагонали.
+    </p>
+    <h2>Результат:</h2>
+    <p>Ответ для А: <span id="answer1"></span></p>
+    <p>Ответ для В: <span id="answer2"></span></p>
+    <p><input type="button" value="Проверить" onclick="showResponse()"></p>
+    <p><input type="button" value="Очистить" onclick="clearValue()"></p>
+</body>
+
+</html>

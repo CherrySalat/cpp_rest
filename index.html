@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+    <script>
+        utl = "http://localhost:3000/getValue"
+        let response = await fetch(url);
+
+        if (response.ok) { // если HTTP-статус в диапазоне 200-299
+            // получаем тело ответа (см. про этот метод ниже)
+            let json = await response.json();
+        } else {
+            alert("Ошибка HTTP: " + response.status);
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Hello</h1>
+    <button>click on me<p><input type="button" value="Проверить" onclick="isEmail()"></p></button>
+</body>
+
+</html>
